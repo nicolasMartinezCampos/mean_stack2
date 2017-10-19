@@ -8,10 +8,18 @@ app.get('/', function(req, res){
     res.sendFile(path.join(__dirname + '/index.html'));
 });
 
+//router middleware that will happen on every event
+adminRouter.use(function(req, res, next){
+    //log each request to the console
+    console.log(req.method, req.url);
+    //continue doing what we were doing and go to the route
+    next();
+});
+
 // admin main page. the dashboard (http://localhost:1337/admin)
 adminRouter.get('/', function(req, res) {
     res.send('I am the dashboard!');
-    });
+});
 
 //users page
 adminRouter.get('/users', function(req, res){
